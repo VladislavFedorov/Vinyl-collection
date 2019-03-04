@@ -1,0 +1,14 @@
+.add-panel {
+	color: black;
+	margin-top: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+		
+.bd-cols { 
+	text-align: center;
+}
+		
+input { 
+	text-align: center;
+}
