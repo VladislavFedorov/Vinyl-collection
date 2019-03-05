@@ -51,11 +51,11 @@ $password = '';				// MySQL password;
 $database = 'vinyl_bd';		// Database name;
 $usertable = "wantedlist";	// Table name;
  
-$db = mysql_connect($hostname, $username, $password) or die ("ERROR: MySQL.");
-mysql_select_db($database) or die ("ERROR: DB");
+$db = mysqli_connect($hostname, $username, $password, $database) or die ("ERROR: MySQL.");
+mysqli_select_db($db, $database) or die ("ERROR: DB");
 
 $query = "SELECT * FROM `$usertable`";
-$resource = mysql_query($query);
+$resource = mysqli_query($db, $query);
 
 echo '<thead>';
 	echo '<tr class="bd-menu">';
@@ -72,7 +72,7 @@ echo '<thead>';
 echo '</thead>';
 
 
-while($row = mysql_fetch_array($resource)) {
+while($row = mysqli_fetch_array($resource)) {
 	echo '<tbody>';
 		echo '<tr class="bd-cols">';
 			echo "<th>" . $row['wl_id'] . "</th>";
