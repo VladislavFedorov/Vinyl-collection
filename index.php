@@ -17,28 +17,10 @@
 
 <div class="container">
 
-
 <?php
-	include '_basic/header.php'; // HEADER
-?>
-
-
-<?php
-	include '_basic/addpanel.php'; // ADMIN PANEL
-?>
-
-
-
-  
- 
-
-
-
-<?php
-
-echo '<table class="table table-bordered table-hover">';
 
 ## Information about MySQL database;
+
 $hostname = 'localhost';	// Hostname;
 $username = 'root';			// MySQL login;
 $password = '';				// MySQL password;
@@ -50,6 +32,16 @@ mysqli_select_db($db, $database) or die ("ERROR: DB");
 
 $query = "SELECT * FROM `$usertable`";
 $resource = mysqli_query($db, $query);
+
+
+include '_basic/header.php'; // HEADER
+include '_basic/addpanel.php'; // ADMIN PANEL
+?>
+
+
+<?php
+
+echo '<table class="table table-bordered table-hover">';
 
 echo '<thead>';
 	echo '<tr class="bd-menu">';
@@ -88,15 +80,12 @@ echo '</table>';
 ?>
 
 
-
-
 <?php 
 	include '_basic/footer.php'; // FOOTER
 ?>
 
 
 </div> <!-- /container's END -->
-
 
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

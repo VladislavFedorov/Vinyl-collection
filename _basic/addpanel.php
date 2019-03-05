@@ -14,7 +14,7 @@
 </tr>
 	
 <tr class="bd-cols">
-	<form name="test" method="post" action="input1.php">
+	<form method="post" action="">
 		<th class="add-panel">Admin panel:</th>
 		<th>
 			<input type="text" size="10" value=" ">
