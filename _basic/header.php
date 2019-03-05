@@ -31,11 +31,7 @@
 			</a>
         </li>
 	</form>
-        <li class="nav-item">
-            <a class="nav-link" href="/login.php">
-				<button type="submit" class="btn btn-outline-light">Login</button>
-			</a>
-        </li>
+
     </ul>
  </div>
  
