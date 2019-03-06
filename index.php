@@ -35,6 +35,16 @@ $resource = mysqli_query($db, $query);
 
 
 include '_basic/header.php'; // HEADER
+
+
+if ( isset($_POST["Band"]) ){
+	
+    $sql = mysqli_query( $db, "INSERT INTO `$usertable` (`collection_band`, `collection_album`, `collection_year`, `collection_version`, `collection_genre`, `collection_fortrade`, `collection_notes`)
+											VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
+
+};  // Insert a new string into the Collection table.
+
+
 include '_basic/addpanel.php'; // ADMIN PANEL
 ?>
 
@@ -48,7 +58,7 @@ echo '<thead>';
 		echo '<th>ID</th>';
 		echo '<th>Band</th>';
 		echo '<th>Album</th>';
-        echo '<th>Year</th>';
+		echo '<th>Year</th>';
 		echo '<th>Version</th>';
 		echo '<th>Genre</th>';
 		echo '<th>For trade</th>';
