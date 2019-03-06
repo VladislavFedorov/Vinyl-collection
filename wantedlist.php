@@ -2,7 +2,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Vinyl collection | DB</title>
+	<title>Vinyl collection</title>
 	
 	<link rel="stylesheet" href="css/mainpages.css">
 	<link rel="stylesheet" href="css/addpanel.css">
@@ -34,8 +34,8 @@ $query = "SELECT * FROM `$usertable`";
 $resource = mysqli_query($db, $query);
 
 
-include '_basic/header.php'; // HEADER
-include '_basic/addpanel.php'; // ADMIN PANEL
+include 'includes/header.php'; // HEADER
+include 'includes/addpanel.php'; // ADMIN PANEL
 ?>
 
 
@@ -69,7 +69,7 @@ while($row = mysqli_fetch_array($resource)) {
 			echo "<th>" . $row['wl_genre'] . "</th>";
 			echo "<th>" . $row['wl_fortrade'] . "</th>";
 			echo "<th>" . $row['wl_notes'] . "</th>";
-			echo '<th><input type="checkbox" name="option" value="y"></th>';
+			echo '<th><input type="checkbox" name="option"></th>';
 		echo '</tr>';
 	echo '</tbody>';
 };
@@ -80,7 +80,7 @@ echo '</table>';
 
 
 <?php 
-	include '_basic/footer.php'; // FOOTER
+	include 'includes/footer.php'; // FOOTER
 ?>
 
 

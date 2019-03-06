@@ -2,14 +2,13 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Vinyl collection | DB</title>
+	<title>Vinyl collection</title>
 	
 	<link rel="stylesheet" href="css/mainpages.css">
 	<link rel="stylesheet" href="css/addpanel.css">
 	
 	<!-- For Bootstrap -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -19,37 +18,50 @@
 
 <?php
 
-## Information about MySQL database;
+## Information about MySQL database:
 
-$hostname = 'localhost';	// Hostname;
-$username = 'root';			// MySQL login;
-$password = '';				// MySQL password;
-$database = 'vinyl_bd';		// Database name;
-$usertable = "collection";	// Table name;
+$hostname = 'localhost';			## Hostname;
+$username = 'root';					## MySQL login;
+$password = '';						## MySQL password;
+$database = 'vinyl_bd';				## Database name;
+$collectiontable = "collection";	## Table name;
+$wantedtable = "wantedlist";		## Table name;
+
  
 $db = mysqli_connect($hostname, $username, $password, $database) or die ("ERROR: MySQL.");
 mysqli_select_db($db, $database) or die ("ERROR: DB");
 
-$query = "SELECT * FROM `$usertable`";
+$query = "SELECT * FROM `$collectiontable`";
 $resource = mysqli_query($db, $query);
 
 
-include '_basic/header.php'; // HEADER
+include 'includes/header.php'; ## Header
 
 
-if ( isset($_POST["Band"]) ){
+if ( isset($_POST["add-to-collection"]) ){
+	## Insert a new string into the Collection table.
 	
-    $sql = mysqli_query( $db, "INSERT INTO `$usertable` (`collection_band`, `collection_album`, `collection_year`, `collection_version`, `collection_genre`, `collection_fortrade`, `collection_notes`)
-							  VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
+    $sql = mysqli_query( $db, "INSERT INTO `$collectiontable` (`collection_band`, `collection_album`, `collection_year`, `collection_version`, `collection_genre`, `collection_fortrade`, `collection_notes`) VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
 
-};  // Insert a new string into the Collection table.
+} elseif ( isset($_POST["add-to-wanted-list"]) ){
+	## Insert a new string into the Wanted list table.
+	
+    $sql = mysqli_query( $db, "INSERT INTO `$wantedtable` (`wl_band`, `wl_album`, `wl_year`, `wl_version`, `wl_genre`, `wl_fortrade`, `wl_notes`) VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
+
+} elseif ( isset($_POST["delete-selected"]) ) {
+	## Delete selected string from the Collection table.
+	
+    $sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `ID` = {$_POST["collection_id"]}");
+	
+    //$sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `ID` = {$_POST["collection_id"]}");
+
+};
 
 
-include '_basic/addpanel.php'; // ADMIN PANEL
-?>
+include 'includes/addpanel.php'; ## Admin panel
 
 
-<?php
+## Header of the Collection table
 
 echo '<table class="table table-bordered table-hover">';
 
@@ -68,6 +80,8 @@ echo '<thead>';
 echo '</thead>';
 
 
+## Body of the Collection table
+
 while($row = mysqli_fetch_array($resource)) {
 	echo '<tbody>';
 		echo '<tr class="bd-cols">';
@@ -79,7 +93,11 @@ while($row = mysqli_fetch_array($resource)) {
 			echo "<th>" . $row['collection_genre'] . "</th>";
 			echo "<th>" . $row['collection_fortrade'] . "</th>";
 			echo "<th>" . $row['collection_notes'] . "</th>";
-			echo '<th><input type="checkbox" name="option" value="y"></th>';
+			
+			echo '<form method="post" action="">';
+				echo '<th><input type="checkbox" name="' . $row['collection_id'] . '" value="y"></th>';
+			echo '</form>';
+			
 		echo '</tr>';
 	echo '</tbody>';
 };
@@ -87,11 +105,10 @@ while($row = mysqli_fetch_array($resource)) {
 
 echo '</table>';
 
-?>
 
 
-<?php 
-	include '_basic/footer.php'; // FOOTER
+
+	include 'includes/footer.php'; ## Footer
 ?>
 
 
