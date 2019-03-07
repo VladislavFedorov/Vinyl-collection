@@ -18,14 +18,17 @@
 
 <?php
 
-## Information about MySQL database:
+#######################################
+##  Information about MySQL database:
 
-$hostname = 'localhost';			## Hostname;
-$username = 'root';					## MySQL login;
-$password = '';						## MySQL password;
-$database = 'vinyl_bd';				## Database name;
-$collectiontable = "collection";	## Table name;
-$wantedtable = "wantedlist";		## Table name;
+$hostname = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'vinyl_bd';
+$collectiontable = "collection";
+$wantedtable = "wantedlist";
+									 ##
+#######################################
 
  
 $db = mysqli_connect($hostname, $username, $password, $database) or die ("ERROR: MySQL.");
@@ -51,10 +54,12 @@ if ( isset($_POST["add-to-collection"]) ){
 } elseif ( isset($_POST["delete-selected"]) ) {
 	## Delete selected string from the Collection table.
 	
-    $sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `ID` = {$_POST["collection_id"]}");
-	
-    //$sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `ID` = {$_POST["collection_id"]}");
 
+		$sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `$collectiontable`.`collection_id` = '' " );
+
+
+
+	
 };
 
 
@@ -93,11 +98,14 @@ while($row = mysqli_fetch_array($resource)) {
 			echo "<th>" . $row['collection_genre'] . "</th>";
 			echo "<th>" . $row['collection_fortrade'] . "</th>";
 			echo "<th>" . $row['collection_notes'] . "</th>";
+
 			
 			echo '<form method="post" action="">';
-				echo '<th><input type="checkbox" name="' . $row['collection_id'] . '" value="y"></th>';
+				echo '<th><input type="checkbox" name="' . $row['collection_id'] . '" value="on"></th>';
 			echo '</form>';
 			
+		
+
 		echo '</tr>';
 	echo '</tbody>';
 };
