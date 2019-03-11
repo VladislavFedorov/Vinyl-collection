@@ -27,7 +27,7 @@ $password = '';
 $database = 'vinyl_bd';
 $collectiontable = "collection";
 $wantedtable = "wantedlist";
-									 ##
+									 
 #######################################
 
  
@@ -50,16 +50,6 @@ if ( isset($_POST["add-to-collection"]) ){
 	## Insert a new string into the Wanted list table.
 	
     $sql = mysqli_query( $db, "INSERT INTO `$wantedtable` (`wl_band`, `wl_album`, `wl_year`, `wl_version`, `wl_genre`, `wl_fortrade`, `wl_notes`) VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
-
-} elseif ( isset($_POST["delete-selected"]) ) {
-	## Delete selected string from the Collection table.
-	
-
-		$sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `$collectiontable`.`collection_id` = '' " );
-
-
-
-	
 };
 
 
@@ -89,6 +79,7 @@ echo '</thead>';
 
 while($row = mysqli_fetch_array($resource)) {
 	echo '<tbody>';
+		echo "<form method='post' action=''>";
 		echo '<tr class="bd-cols">';
 			echo "<th>" . $row['collection_id'] . "</th>";
 			echo "<th>" . $row['collection_band'] . "</th>";
@@ -98,22 +89,36 @@ while($row = mysqli_fetch_array($resource)) {
 			echo "<th>" . $row['collection_genre'] . "</th>";
 			echo "<th>" . $row['collection_fortrade'] . "</th>";
 			echo "<th>" . $row['collection_notes'] . "</th>";
-
+		
 			
-			echo '<form method="post" action="">';
-				echo '<th><input type="checkbox" name="' . $row['collection_id'] . '" value="on"></th>';
-			echo '</form>';
+				echo "<th id='del'>";
+					//echo "<a href='delete_db.php?id=" . $row['collection_id'] . "'>";
+					echo "<a href='#'>";
+						echo "<button type='submit' class='btn btn-outline-danger' name='delete-selected'>";
+						
+						echo "X </button>";
+					echo "</a>";
+				echo "</th>";
 			
 		
+		//<button type="submit"  name="delete-selected">Delete selected</button>
 
 		echo '</tr>';
+		echo "<form>";
 	echo '</tbody>';
+
+
+	if ( isset($_POST["delete-selected[]"]) ) {
+	## Delete selected string from the Collection table.
+
+		$sql = mysqli_query($db, "DELETE FROM `$collectiontable` WHERE `$collectiontable`.`collection_id` = '$a'        ");
+};
+	
+	
 };
 
 
 echo '</table>';
-
-
 
 
 	include 'includes/footer.php'; ## Footer

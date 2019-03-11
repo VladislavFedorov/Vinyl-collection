@@ -42,9 +42,8 @@
 		<p class="add-panel">
 			<button type="submit" class="btn btn-outline-primary" name="add-to-collection">Add to My collection</button>
 			<button type="submit" class="btn btn-outline-primary" name="add-to-wanted-list">Add to Wanted list</button>
-			<button type="submit" class="btn btn-outline-danger" name="delete-selected">Delete selected</button>
-			<button type="submit" class="btn btn-outline-danger">Exit</button>
 			<button type="submit" class="btn btn-outline-success" onclick="location.reload()">Reload page</button>
+			<button type="submit" class="btn btn-outline-danger">Exit</button>
 		</p>
 	</form>
 </tr>
