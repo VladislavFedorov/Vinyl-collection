@@ -50,11 +50,12 @@ if ( isset($_POST["add-to-collection"]) ){
 	## Insert a new string into the Wanted list table.
 	
     $sql = mysqli_query( $db, "INSERT INTO `$wantedtable` (`wl_band`, `wl_album`, `wl_year`, `wl_version`, `wl_genre`, `wl_fortrade`, `wl_notes`) VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
-} elseif ( isset($_POST['submit']) ){
+} elseif ( isset($_POST['id']) ){
 	## Delete a new string from the Collection table.
 	
-	$deleteselected = $_POST['deleteselected'];
-	mysql_query("DELETE FROM `$collectiontable` WHERE id=$deleteselected");
+    $sql = mysqli_query( $db, "DELETE FROM `$collectiontable` WHERE `collection_id` = '{$_POST['id']}'");
+     
+
 };
 
 
@@ -84,7 +85,7 @@ echo '</thead>';
 
 while($row = mysqli_fetch_array($resource)) {
 	echo '<tbody>';
-		echo "<form method='post' action=''>";
+		
 		echo '<tr class="bd-cols">';
 			echo "<th>" . $row['collection_id'] . "</th>";
 			echo "<th>" . $row['collection_band'] . "</th>";
@@ -95,27 +96,17 @@ while($row = mysqli_fetch_array($resource)) {
 			echo "<th>" . $row['collection_fortrade'] . "</th>";
 			echo "<th>" . $row['collection_notes'] . "</th>";
 		
-			
+			echo "<form method='post' action=''>";
 				echo "<th id='del'>";
-					echo "<a href='#'>";
-						echo "<button type='submit' class='btn btn-outline-danger' name='deleteselected' value='" . $row["collection_id"] . "'";
-				
-					echo "</a>";
+						echo "<button type='submit' class='btn btn-outline-danger' name='id' value='" . $row["collection_id"] . "'>";
 				echo "</th>";
-			
-
+			echo "<form>";	
 		echo '</tr>';
-		echo "<form>";
+		
 	echo '</tbody>';
 
 	
 };
-
-
-
-
-
-
 
 
 echo '</table>';
