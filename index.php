@@ -18,8 +18,8 @@
 
 <?php
 
-#######################################
-##  Information about MySQL database:
+#########################
+##   MySQL's information:
 
 $hostname = 'localhost';
 $username = 'root';
@@ -28,15 +28,13 @@ $database = 'vinyl_bd';
 $collectiontable = "collection";
 $wantedtable = "wantedlist";
 									 
-#######################################
-
  
 $db = mysqli_connect($hostname, $username, $password, $database) or die ("ERROR: MySQL.");
 mysqli_select_db($db, $database) or die ("ERROR: DB");
 
 $query = "SELECT * FROM `$collectiontable`";
 $resource = mysqli_query($db, $query);
-
+#######################################
 
 include 'includes/header.php'; ## Header
 
@@ -50,12 +48,11 @@ if ( isset($_POST["add-to-collection"]) ){
 	## Insert a new string into the Wanted list table.
 	
     $sql = mysqli_query( $db, "INSERT INTO `$wantedtable` (`wl_band`, `wl_album`, `wl_year`, `wl_version`, `wl_genre`, `wl_fortrade`, `wl_notes`) VALUES ( '{$_POST['Band']}', '{$_POST['Album']}', '{$_POST['Year']}', '{$_POST['Version']}', '{$_POST['Genre']}', '{$_POST['Trade']}', '{$_POST['Notes']}' )");
+	
 } elseif ( isset($_POST['id']) ){
 	## Delete a new string from the Collection table.
 	
     $sql = mysqli_query( $db, "DELETE FROM `$collectiontable` WHERE `collection_id` = '{$_POST['id']}'");
-     
-
 };
 
 
@@ -64,7 +61,8 @@ include 'includes/addpanel.php'; ## Admin panel
 
 ## Header of the Collection table
 
-echo '<table class="table table-bordered table-hover">';
+echo '<div class="table-responsive">';
+echo '<table class="table table-bordered table-hover table-sm">';
 
 echo '<thead>';
 	echo '<tr class="bd-menu">';
@@ -76,17 +74,18 @@ echo '<thead>';
 		echo '<th>Genre</th>';
 		echo '<th>For trade</th>';
 		echo '<th>Notes</th>';
-		echo '<th>-</th>';
+		echo '<th>Delete</th>';
     echo '</tr>';
 echo '</thead>';
-
 
 ## Body of the Collection table
 
 while($row = mysqli_fetch_array($resource)) {
+	
 	echo '<tbody>';
 		
 		echo '<tr class="bd-cols">';
+		
 			echo "<th>" . $row['collection_id'] . "</th>";
 			echo "<th>" . $row['collection_band'] . "</th>";
 			echo "<th>" . $row['collection_album'] . "</th>";
@@ -97,20 +96,19 @@ while($row = mysqli_fetch_array($resource)) {
 			echo "<th>" . $row['collection_notes'] . "</th>";
 		
 			echo "<form method='post' action=''>";
-				echo "<th id='del'>";
-						echo "<button type='submit' class='btn btn-outline-danger' name='id' value='" . $row["collection_id"] . "'>";
+				echo "<th>";
+					echo "<button type='submit' class='btn btn-outline-danger' name='id' value='" . $row["collection_id"] . "'> X </button>";
 				echo "</th>";
 			echo "<form>";	
+			
 		echo '</tr>';
 		
-	echo '</tbody>';
-
-	
+	echo '</tbody>';	
 };
 
 
 echo '</table>';
-
+echo '</div>';
 
 	include 'includes/footer.php'; ## Footer
 ?>
@@ -123,6 +121,5 @@ echo '</table>';
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
 </body>

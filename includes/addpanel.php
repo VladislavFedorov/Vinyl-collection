@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="table">
 
 <thead>
@@ -51,6 +52,4 @@
 </thead>
   
 </table>
-
-
-
+</div>
