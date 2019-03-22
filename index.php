@@ -58,25 +58,28 @@ if ( isset($_POST["add-to-collection"]) ){
 
 include 'includes/addpanel.php'; ## Admin panel
 
+?>
 
-## Header of the Collection table
+<!-- Header of the Collection table -->
 
-echo '<div class="table-responsive">';
-echo '<table class="table table-bordered table-hover table-sm">';
+<div class="table-responsive">
+<table class="table table-bordered table-hover table-sm">
 
-echo '<thead>';
-	echo '<tr class="bd-menu">';
-		echo '<th>ID</th>';
-		echo '<th>Band</th>';
-		echo '<th>Album</th>';
-		echo '<th>Year</th>';
-		echo '<th>Version</th>';
-		echo '<th>Genre</th>';
-		echo '<th>For trade</th>';
-		echo '<th>Notes</th>';
-		echo '<th>Delete</th>';
-    echo '</tr>';
-echo '</thead>';
+<thead>
+	<tr class="bd-menu">
+		<th>ID</th>
+		<th>Band</th>
+		<th>Album</th>
+		<th>Year</th>
+		<th>Version</th>
+		<th>Genre</th>
+		<th>For trade</th>
+		<th>Notes</th>
+		<th>Delete</th>
+    </tr>
+</thead>
+
+<?php
 
 ## Body of the Collection table
 
