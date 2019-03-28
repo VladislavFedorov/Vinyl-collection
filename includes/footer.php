@@ -3,7 +3,7 @@
 	<div class="footer-copyright text-center py-3" > <?php echo date(Y)?> | Copyright:
 		<a href="http://vladislavdrews.com">vladislavdrews.com</a> | 
 		<a href="https://github.com/VladislavFedorov/Vinyl-collection" target="_blank">GitHub</a> |
-		<a href="includes/adminlogin.php" id="login-link">Login</a>
+		<a href="includes/adminlogin.php" class="strong"><strong>Login</strong></a>
 	</div>
 
 </footer>
