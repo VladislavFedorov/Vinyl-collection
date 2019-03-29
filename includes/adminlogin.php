@@ -26,7 +26,7 @@
 
 <div class="centered">
 <form name="contact_form" method="post" onsubmit="return validate()" class="form-signin">
-	<input type="text" name="email" class="form-control own-style"  value="Your Email">
+	<input type="text" name="login" class="form-control own-style"  value="Your Login">
 	<input type="text" name="password" class="form-control own-style" value="Your Password">
 	<input type="submit" value="Log In" class="btn btn-primary own-style">
 </form>
@@ -36,24 +36,16 @@
 
 function validate(){
    
-   var email = document.forms["contact_form"]["email"].value;
+   var login = document.forms["contact_form"]["login"].value;
    var password = document.forms["contact_form"]["password"].value;
 
-   if (email.length == 0){
-      alert("Please enter your email");
+   if (login.length == 0){
+      alert("Please enter your login");
       return false;
    }
 
    if (password.length == 0){
       alert("Please enter your password.");
-      return false;
-   }
-
-   var at = email.indexOf("@");
-   var dot = email.indexOf(".");
-
-   if (at < 1 || dot < 1){
-      alert("Error in your email \n >>> '@' or '.' <<<");
       return false;
    }
 };
