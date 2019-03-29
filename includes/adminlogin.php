@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	
 	<style>
-	h1, .centered { text-align: center; }
+	h1, h6, .centered { text-align: center; }
 	.own-style {
 		width: 200px;
 		margin: auto;
@@ -23,6 +23,7 @@
 <body>
 
 <h1 class="h3 mb-3 font-weight-normal">: Authorisation :</h1>
+<h6>: or <a href="http://vinyl.vladislavdrews.com">back</a> to the collection :</h1>
 
 <div class="centered">
 <form name="contact_form" method="post" onsubmit="return validate()" class="form-signin">
