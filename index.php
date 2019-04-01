@@ -64,19 +64,19 @@ include 'includes/addpanel.php'; ## Admin panel
 <!-- Header of the Collection table -->
 
 <div class="table-responsive">
-<table class="table table-bordered table-hover table-sm">
+<table class="table table-bordered table-hover table-sm" id="grid">
 
 <thead>
 	<tr class="bd-menu">
-		<th>ID</th>
-		<th>Band</th>
-		<th>Album</th>
-		<th>Year</th>
-		<th>Version</th>
-		<th>Genre</th>
-		<th>For trade</th>
-		<th>Notes</th>
-		<th>Delete</th>
+		<th data-type="number">ID</th>
+		<th data-type="string">Band</th>
+		<th data-type="string">Album</th>
+		<th data-type="string">Year</th>
+		<th data-type="string">Version</th>
+		<th data-type="string">Genre</th>
+		<th data-type="string">For trade</th>
+		<th data-type="string">Notes</th>
+		<th data-type="string">Delete</th>
     </tr>
 </thead>
 
@@ -123,6 +123,47 @@ echo '</div>';
 <?php
 	include 'includes/search.php'; ## Search
 ?>
+
+<script>
+    var grid = document.getElementById('grid');
+
+    grid.onclick = function(e) {
+      if (e.target.tagName != 'TH') return;
+      sortGrid(e.target.cellIndex, e.target.getAttribute('data-type'));
+    };
+
+    function sortGrid(colNum, type) {
+      var tbody = grid.getElementsByTagName('tbody')[0];
+
+      var rowsArray = [].slice.call(tbody.rows);
+
+      var compare;
+
+      switch (type) {
+        case 'number':
+          compare = function(rowA, rowB) {
+            return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML;
+          };
+          break;
+        case 'string':
+          compare = function(rowA, rowB) {
+            return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML;
+          };
+          break;
+      }
+
+      rowsArray.sort(compare);
+
+      grid.removeChild(tbody);
+
+      for (var i = 0; i < rowsArray.length; i++) {
+        tbody.appendChild(rowsArray[i]);
+      }
+
+      grid.appendChild(tbody);
+
+    }
+ </script>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
